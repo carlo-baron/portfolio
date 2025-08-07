@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 
-function Line({ number, isActive, onMouseEnter}: { number: number, isActive: boolean, onMouseEnter: () => void}) {
+function Line({ number, isActive, onMouseEnter }: { number: number, isActive: boolean, onMouseEnter: () => void }) {
     return (
         <div className="line" onMouseEnter={onMouseEnter}>
             <p className="line-num">{number}</p>
@@ -20,7 +20,7 @@ function Lines(): JSX.Element {
         const lineHeight = 24;
         const mainHeight = document.querySelector('main')?.clientHeight || window.innerHeight;
 
-        let targetParts = Math.floor(mainHeight / lineHeight);
+        let targetParts = Math.floor((mainHeight + lineHeight) / lineHeight);
         if (targetParts % 2 !== 0) targetParts -= 1;
 
         setLineCount(targetParts);
@@ -28,55 +28,107 @@ function Lines(): JSX.Element {
     }, []);
 
     const lines = [];
-    for (let i = 0; i < lineCount + 1; i++) {
+    for (let i = 0; i < lineCount; i++) {
         lines.push(
-            <Line 
-            key={i} 
-            number={i + 1} 
-            isActive={i === activeLineIndex}
-            onMouseEnter={() => setActiveLineIndex(i)}/>
+            <Line
+                key={i}
+                number={i + 1}
+                isActive={i === activeLineIndex}
+                onMouseEnter={() => setActiveLineIndex(i)} />
         );
     }
 
-    return <>
-            <div className="lines">
-                {lines}
-            </div>
-        </>;
+    return (
+        <div className="lines">
+            {lines}
+        </div>
+    );
 }
 
-function Welcome(){
-    return(
-        <>
-            <div className="wrapper">
-                <div className="head">Carlo's Portfolio v0.1.0</div>
-                <div className="command">
-                    <span>type: :help<span>&lt;Enter&gt;</span></span>
-                    <span>type: i<span>&lt;Enter&gt;</span></span>
-                    <span>type: q<span>&lt;Enter&gt;</span></span>
-                    <span>type: resume<span>&lt;Enter&gt;</span></span>
-                </div>
-                <div className="desc">
-                    <p>if you're new!</p>
-                    <p>to view</p>
-                    <p>to exit</p>
-                    <p>download resume</p>
-                </div>
+function Welcome() {
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const [topOffset, setTopOffset] = useState<number>(0);
+
+    useEffect(() => {
+        const calcTop = () => {
+            const wrapper = wrapperRef.current;
+            const lineHeight = 24;
+
+            if (wrapper) {
+                const mainHeight = document.querySelector('main')?.clientHeight || window.innerHeight;
+                const wrapperHeight = wrapper.clientHeight;
+
+                const rawTop = (mainHeight - wrapperHeight) / 2;
+                const snappedTop = Math.round(rawTop / lineHeight) * lineHeight;
+
+                setTopOffset(snappedTop);
+            }
+        }
+
+        calcTop();
+        window.addEventListener('resize', calcTop);
+        return () => window.removeEventListener('resize', calcTop);
+    }, []);
+
+    return (
+        <div 
+        className="wrapper welcome"
+        ref={wrapperRef}
+        style={{top: `${topOffset}px`}}
+        >
+            <div className="head">Carlo's Portfolio v0.1.0</div>
+            <div className="command">
+                <span>type: :help<span>&lt;Enter&gt;</span></span>
+                <span>type: i<span>&lt;Enter&gt;</span></span>
+                <span>type: q<span>&lt;Enter&gt;</span></span>
+                <span>type: resume<span>&lt;Enter&gt;</span></span>
             </div>
-        </>
+            <div className="desc">
+                <p>if you're new!</p>
+                <p>to view</p>
+                <p>to exit</p>
+                <p>download resume</p>
+            </div>
+        </div>
+    );
+}
+
+function InfoHead() {
+    return (
+        <div className="wrapper banner">
+            <pre>
+{`
+ ██████╗ █████╗ ██████╗ ██╗      ██████╗ 
+██╔════╝██╔══██╗██╔══██╗██║     ██╔═══██╗
+██║     ███████║██████╔╝██║     ██║   ██║
+██║     ██╔══██║██╔══██╗██║     ██║   ██║
+╚██████╗██║  ██║██║  ██║███████╗╚██████╔╝
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝        
+`}
+            </pre>
+        </div>
     );
 }
 
 function App() {
+    const [isStart, setIsStart] = useState<boolean>(true);
+
+    useEffect(() => {
+        const handleKey = (e: KeyboardEvent) => {
+            if (e.key === 'i') {
+                setIsStart(false);
+            }
+        };
+        window.addEventListener('keydown', handleKey);
+        return () => window.removeEventListener('keydown', handleKey);
+    }, []);
+
     return (
-        <>
-            <main>
-                <Welcome />
-                <Lines />
-            </main>
-        </>
+        <main>
+            {isStart ? <Welcome /> : <InfoHead />}
+            <Lines />
+        </main>
     );
 }
 
 export default App;
-

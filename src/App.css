@@ -1,125 +1,152 @@
-:root{
+:root {
     --bg: #111722;
     --bg-dark: #060A14;
     --highlight: #1F2B40;
     --text: #F5F8FF;
+    --text-muted: #3A4864; 
     --line-num: #CFAB63;
+    --dfont: "jetbrains", monospace;
 }
 
-*{
+@font-face {
+    font-family: "jetbrains";
+    src: url('/JetBrainsMonoNerdFont-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: var(--dfont);
+    font-size: 2.4rem;
 }
 
-html,body,#root{
+html, body, #root {
     height: 100%;
 }
 
-html{
+html {
     font-size: 62.5%;
 }
 
-body{
+body {
     padding: 1rem;
     background: var(--bg-dark);
 }
 
-main{
+main {
     background: gray;
     height: 100%;
     width: 100%;
     overflow: hidden;
-
     position: relative;
 }
 
-.wrapper{
-    position: relative;
+/* Wrapper layout */
+.wrapper {
+    position: absolute;
+    color: var(--text);
+    z-index: 10;
+}
+
+/* Welcome layout grid */
+.wrapper.welcome {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "head head"
         "comm desc";
     grid-template-columns: 1fr 1fr;
+    width: 80%;
+    column-gap: 4rem;
 
-    width: fit-content;
-    font-size: 2.4rem;
-    color: var(--text);
-
-    z-index: 10;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: 264px;
+    left: calc(1.5rem + 50%);
+    transform: translateX(-50%);
 }
 
-.wrapper > div{
+.wrapper.welcome > div,
+.wrapper.welcome > div span,
+.wrapper.welcome > div p {
     line-height: 24px;
 }
 
-.wrapper > div.head{
+.wrapper.welcome > div span > span{
+    color: var(--text-muted) ;
+}
+
+.wrapper.welcome > div.head {
     text-align: center;
     grid-area: head;
 }
-.wrapper > div.command{ 
-    grid-area: comm; 
-}
-.wrapper > div.desc{
-    grid-area: desc; 
-    padding-left: 10%;
+
+.wrapper.welcome > div.command {
+    grid-area: comm;
 }
 
-.command > span{
+.wrapper.welcome > div.desc {
+    grid-area: desc;
+    padding-left: 30%;
+}
+
+.command > span {
     display: block;
 }
 
-.lines{
+/* ASCII banner */
+.wrapper.banner {
+    font-size: 1rem;
+    white-space: pre;
+}
+
+pre {
+    background: green;
+    font-family: var(--dfont);
+    font-size: 1.3rem;
+    line-height: 1.2;
+}
+
+/* Line background system */
+.lines {
     position: absolute;
     width: 100%;
     z-index: 0;
-    top:0;
+    top: 0;
 }
 
-.line{
+.line {
     display: flex;
-    gap: 3rem;
-
     width: 100%;
     height: 24px;
     background-color: var(--bg);
 }
 
 .line > p {
-    font-size: 2.4rem;
-    width: 2.5rem;
+    width: 3rem;
+    font-size: 2rem;
     user-select: none;
     color: var(--line-num);
 }
 
-.highlight{
+.highlight {
     display: none;
-
     background-color: var(--highlight);
     flex: 1;
 }
 
-.highlight.active{
+.highlight.active {
     display: block;
 }
 
-.highlight > div.cursor{
+.highlight > .cursor {
     background-color: var(--text);
     height: 100%;
-    width: 1rem;
-
+    width: 1.3rem;
     animation: blinker 0.8s steps(1, start) infinite;
 }
 
-@keyframes blinker{
-    0%, 49.9%{
-        opacity: 1;
-    }
-    50%, 100%{
-        opacity: 0; 
-    }
+@keyframes blinker {
+    0%, 49.9% { opacity: 1; }
+    50%, 100% { opacity: 0; }
 }
-
