@@ -93,8 +93,14 @@ function Welcome() {
     );
 }
 
-function NavigationButtons(){
-    const [selected, setSelected] = useState<string>("home");
+function NavigationButtons({
+        selected,
+        setSelected,
+    }:{
+        selected: string;
+        setSelected: React.Dispatch<React.SetStateAction<string>>;
+    }){
+
 
     return(
         <nav>
@@ -132,22 +138,21 @@ function Header() {
                 <div className="my-title">Student Developer</div>
                 <div className="self-intro">I’m a student working toward becoming a software engineer, with an interest in both front-end and back-end development for web and other systems. I enjoy tackling challenges, thinking through problems carefully, and collaborating with others to find effective solutions.</div>
             </div>
-            <NavigationButtons/>
         </>
     );
 }
 
 function Home(){
    return(
-        <div className="home">
+        <div className="home page-content">
             <pre>
-{`# Welcome to carlo.dev -----------------------------------
+{`
+# Welcome to carlo.dev -----------------------------------
 Hi there! I'm glad you're here.
 
 This site is my personal space to explore and share my work
 as a student developer. I'm passionate about full-stack 
-development 
-and systems programming.
+development and systems programming.
 
 ## 📌 Quick Stats ----------------------------------------
 - Projects:     5 active
@@ -165,11 +170,77 @@ and systems programming.
    ); 
 }
 
-function PageContent(){
+function Projects(){
+   return(
+        <div className="projects page-content">
+            <pre>
+{`
+# 🛠️ Projects --------------------------------------------
+Here are some of the personal projects I've built to learn,
+explore, and apply different technologies.
+
+## 📂 Active Projects ------------------------------------
+- **todo-app/**
+  - A minimalist task manager using React and Tailwind CSS
+  - GitHub: TBA 
+- **rantals/**
+    - A social media platform dedicated for dev blogs
+    - GitHub: TBA 
+
+# 🧠 Tech Stack ------------------------------------------ 
+- **Languages**: JavaScript && TypeScript, Python, C#, PHP 
+- **Frameworks**: React, Node.js, Express.js 
+- **Tools**: Git, Neovim, Google, ChatGPT
+`}
+            </pre>
+        </div>
+   ); 
+}
+
+function About(){
+   return(
+        <div className="about page-content">
+            <pre>
+{`
+# 👋 About Me --------------------------------------------
+I enjoy working across the stack and continuously learning 
+new technologies. [X] [IG] [GitHub] [FB]
+
+## 🧰 Skills Summary ------------------------------------
+- Problem solving
+- Collaboration and communication
+- Systems thinking
+- Attention to detail
+
+## 🎓 Education -----------------------------------------
+- B.S. in Information Technology @ Centro Escolar University 
+- Expected Graduation: 2028 
+
+## 📄 Resume --------------------------------------------
+[Download Resume] (or ":open resume.pdf")
+`}
+            </pre>
+        </div>
+   ); 
+}
+
+function PageContent({selected}:{selected:string}){
+    function pageToLoad(){
+        switch(selected){
+            case "home":
+                return <Home/>
+            case "projects":
+                return <Projects/>
+            case "about":
+                return <About/>
+            default: 
+                return <div></div>
+        }
+    }
     return(
         <>
             <div className="content">
-                <Home/>
+                {pageToLoad()}
             </div>
         </>
     );
@@ -177,6 +248,7 @@ function PageContent(){
 
 function App() {
     const [isStart, setIsStart] = useState<boolean>(true);
+    const [selected, setSelected] = useState<string>("home");
 
     useEffect(() => {
         const handleKey = (e: KeyboardEvent) => {
@@ -194,7 +266,13 @@ function App() {
                 (
                     <div className="wrapper">
                         <Header />
-                        <PageContent />
+                        <NavigationButtons
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <PageContent 
+                            selected={selected}
+                        />
                     </div>
                 )
             }

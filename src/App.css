@@ -26,6 +26,7 @@
 
 button{
     pointer-events: auto;
+    cursor: pointer;
 }
 
 html, body, #root {
@@ -150,6 +151,7 @@ nav > button{
     color: var(--text);
 
     background: var(--bg);
+    user-select: none;
     border: none;
 }
 
@@ -163,7 +165,7 @@ nav > button.selected{
     justify-content: center;
 }
 
-.home > pre{
+.page-content > pre{
     position: relative;
     line-height: 24px;
 }
