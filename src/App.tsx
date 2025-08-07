@@ -93,20 +93,50 @@ function Welcome() {
     );
 }
 
-function InfoHead() {
+function NavigationButtons(){
+    const [selected, setSelected] = useState<string>("home");
+
+    return(
+        <nav>
+            <button 
+            className={selected === "home" ? 'selected' : ''}
+            onClick={() => setSelected("home")}
+            >(1) Home</button>
+
+            <button 
+            className={selected === "projects" ? 'selected' : ''}
+            onClick={() => setSelected("projects")}
+            >(2) Projects</button>
+
+            <button 
+            className={selected === "about" ? 'selected' : ''}
+            onClick={() => setSelected("about")}
+            >(3) About</button>
+        </nav>
+    );
+}
+
+function Header() {
     return (
-        <div className="wrapper banner">
-            <pre>
-{`
- ██████╗ █████╗ ██████╗ ██╗      ██████╗ 
+        <>
+            <div className="wrapper">
+
+                <div className="banner">
+                    <pre>
+{` ██████╗ █████╗ ██████╗ ██╗      ██████╗ 
 ██╔════╝██╔══██╗██╔══██╗██║     ██╔═══██╗
 ██║     ███████║██████╔╝██║     ██║   ██║
 ██║     ██╔══██║██╔══██╗██║     ██║   ██║
 ╚██████╗██║  ██║██║  ██║███████╗╚██████╔╝
- ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝        
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝
 `}
-            </pre>
-        </div>
+                    </pre>
+                    <div className="my-title">Student Developer</div>
+                    <div className="self-intro">I’m a student working toward becoming a software engineer, with an interest in both front-end and back-end development for web and other systems. I enjoy tackling challenges, thinking through problems carefully, and collaborating with others to find effective solutions.</div>
+                </div>
+                <NavigationButtons/>
+            </div>
+        </>
     );
 }
 
@@ -125,7 +155,11 @@ function App() {
 
     return (
         <main>
-            {isStart ? <Welcome /> : <InfoHead />}
+            {isStart ? (<Welcome />) : 
+                (
+                    <Header />
+                )
+            }
             <Lines />
         </main>
     );
