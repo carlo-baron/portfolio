@@ -17,18 +17,18 @@ function Lines(): JSX.Element {
     const [activeLineIndex, setActiveLineIndex] = useState<number>(0);
 
     useEffect(() => {
-        const lineHeight = 32;
+        const lineHeight = 24;
         const mainHeight = document.querySelector('main')?.clientHeight || window.innerHeight;
 
         let targetParts = Math.floor(mainHeight / lineHeight);
         if (targetParts % 2 !== 0) targetParts -= 1;
 
         setLineCount(targetParts);
-        setActiveLineIndex(1);
+        setActiveLineIndex(0);
     }, []);
 
     const lines = [];
-    for (let i = 0; i < lineCount; i++) {
+    for (let i = 0; i < lineCount + 1; i++) {
         lines.push(
             <Line 
             key={i} 
@@ -38,15 +38,40 @@ function Lines(): JSX.Element {
         );
     }
 
-    return <>{lines}</>;
+    return <>
+            <div className="lines">
+                {lines}
+            </div>
+        </>;
+}
+
+function Welcome(){
+    return(
+        <>
+            <div className="wrapper">
+                <div className="head">Carlo's Portfolio v0.1.0</div>
+                <div className="command">
+                    <span>type: :help<span>&lt;Enter&gt;</span></span>
+                    <span>type: i<span>&lt;Enter&gt;</span></span>
+                    <span>type: q<span>&lt;Enter&gt;</span></span>
+                    <span>type: resume<span>&lt;Enter&gt;</span></span>
+                </div>
+                <div className="desc">
+                    <p>if you're new!</p>
+                    <p>to view</p>
+                    <p>to exit</p>
+                    <p>download resume</p>
+                </div>
+            </div>
+        </>
+    );
 }
 
 function App() {
     return (
         <>
             <main>
-                <div className="content">
-                </div>
+                <Welcome />
                 <Lines />
             </main>
         </>

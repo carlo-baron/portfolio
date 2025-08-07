@@ -1,17 +1,28 @@
+:root{
+    --bg: #111722;
+    --bg-dark: #060A14;
+    --highlight: #1F2B40;
+    --text: #F5F8FF;
+    --line-num: #CFAB63;
+}
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-size: 62.5%;
 }
 
 html,body,#root{
     height: 100%;
 }
 
+html{
+    font-size: 62.5%;
+}
+
 body{
     padding: 1rem;
-    background: black;
+    background: var(--bg-dark);
 }
 
 main{
@@ -19,6 +30,53 @@ main{
     height: 100%;
     width: 100%;
     overflow: hidden;
+
+    position: relative;
+}
+
+.wrapper{
+    position: relative;
+    display: grid;
+    grid-template-areas: 
+        "head head"
+        "comm desc";
+    grid-template-columns: 1fr 1fr;
+
+    width: fit-content;
+    font-size: 2.4rem;
+    color: var(--text);
+
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wrapper > div{
+    line-height: 24px;
+}
+
+.wrapper > div.head{
+    text-align: center;
+    grid-area: head;
+}
+.wrapper > div.command{ 
+    grid-area: comm; 
+}
+.wrapper > div.desc{
+    grid-area: desc; 
+    padding-left: 10%;
+}
+
+.command > span{
+    display: block;
+}
+
+.lines{
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+    top:0;
 }
 
 .line{
@@ -26,20 +84,21 @@ main{
     gap: 3rem;
 
     width: 100%;
-    height: 32px;
-    background-color: green;
+    height: 24px;
+    background-color: var(--bg);
 }
 
 .line > p {
     font-size: 2.4rem;
     width: 2.5rem;
     user-select: none;
+    color: var(--line-num);
 }
 
 .highlight{
     display: none;
 
-    background-color: pink;
+    background-color: var(--highlight);
     flex: 1;
 }
 
@@ -48,15 +107,18 @@ main{
 }
 
 .highlight > div.cursor{
-    background-color: red;
+    background-color: var(--text);
     height: 100%;
-    width: .8rem;
+    width: 1rem;
 
-    animation: blinker 1s linear infinite;
+    animation: blinker 0.8s steps(1, start) infinite;
 }
 
 @keyframes blinker{
-    50%{
+    0%, 49.9%{
+        opacity: 1;
+    }
+    50%, 100%{
         opacity: 0; 
     }
 }
