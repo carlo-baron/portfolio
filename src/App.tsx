@@ -28,7 +28,7 @@ function Lines(): JSX.Element {
     }, []);
 
     const lines = [];
-    for (let i = 0; i < lineCount; i++) {
+    for (let i = 0; i < lineCount-1; i++) {
         lines.push(
             <Line
                 key={i}
@@ -144,84 +144,121 @@ function Header() {
 
 function Home(){
    return(
-        <div className="home page-content">
-            <pre>
-{`
-# Welcome to carlo.dev -----------------------------------
-Hi there! I'm glad you're here.
+    <div className="home page-content">
+        <section>
+            <h1>:e welcome.md</h1>
+            <h2>Welcome to carlo.dev</h2>
+            <p>===</p>
+            <p>Hi there! I'm glad you're here.</p>
+            <p>
+                This site is my personal space to explore and share my work as a student
+                developer. I'm passionate about full-stack development and systems programming.
+            </p>
+        </section>
 
-This site is my personal space to explore and share my work
-as a student developer. I'm passionate about full-stack 
-development and systems programming.
+        <section>
+            <h2>📌 Quick Stats</h2>
+            <p>===</p>
+            <ul>
+                <li>Projects: 5 active</li>
+                <li>Current Task: Writing this portfolio</li>
+                <li>Last Updated: August 2025</li>
+            </ul>
+        </section>
 
-## 📌 Quick Stats ----------------------------------------
-- Projects:     5 active
-- Current Task: Writing this portfolio
-- Last Updated: August 2025
-
-# 🚀 Current Goals----------------------------------------
-- ✅ Finish building this portfolio site
-- 📝 Publish a full-stack React project
-- 📦 Try deploying a personal app using Docker
-- 🔍 Explore WebAssembly for future projects
-`}
-            </pre>
-        </div>
+        <section>
+            <h1>:e goals.md</h1>
+            <h2>🚀 Current Goals</h2>
+            <p>===</p>
+            <ul>
+                <li>✅ Finish building this portfolio site</li>
+                <li>📝 Publish a full-stack React project</li>
+                <li>📦 Try deploying a personal app using Docker</li>
+                <li>🔍 Explore WebAssembly for future projects</li>
+            </ul>
+        </section>
+    </div>
    ); 
 }
 
 function Projects(){
    return(
-        <div className="projects page-content">
-            <pre>
-{`
-# 🛠️ Projects --------------------------------------------
-Here are some of the personal projects I've built to learn,
-explore, and apply different technologies.
+    <div className="projects page-content">
+        <section>
+            <h2>🛠️ Projects</h2>
+            <p>===</p>
+            <p>
+                Here are some of the personal projects I've built to learn,
+                explore, and apply different technologies.
+            </p>
+        </section>
 
-## 📂 Active Projects ------------------------------------
-- **todo-app/**
-  - A minimalist task manager using React and Tailwind CSS
-  - GitHub: TBA 
-- **rantals/**
-    - A social media platform dedicated for dev blogs
-    - GitHub: TBA 
+        <section>
+            <h3>📂 Active Projects</h3>
+            <ul>
+                <li>
+                    <strong>todo-app/</strong><br />
+                    A minimalist task manager using React and Tailwind CSS<br />
+                    GitHub: <em>TBA</em>
+                </li>
+                <li>
+                    <strong>rantals/</strong><br />
+                    A social media platform dedicated for dev blogs<br />
+                    GitHub: <em>TBA</em>
+                </li>
+            </ul>
+        </section>
 
-# 🧠 Tech Stack ------------------------------------------ 
-- **Languages**: JavaScript && TypeScript, Python, C#, PHP 
-- **Frameworks**: React, Node.js, Express.js 
-- **Tools**: Git, Neovim, Google, ChatGPT
-`}
-            </pre>
-        </div>
+        <section>
+            <h3>🧠 Tech Stack</h3>
+            <ul>
+                <li><strong>Languages:</strong> JavaScript & TypeScript, Python, C#, PHP</li>
+                <li><strong>Frameworks:</strong> React, Node.js, Express.js</li>
+                <li><strong>Tools:</strong> Git, Neovim, Google, ChatGPT</li>
+            </ul>
+        </section>
+    </div>
    ); 
 }
 
-function About(){
-   return(
+function About() {
+    return (
         <div className="about page-content">
-            <pre>
-{`
-# 👋 About Me --------------------------------------------
-I enjoy working across the stack and continuously learning 
-new technologies. [X] [IG] [GitHub] [FB]
+            <section>
+                <h2>👋 About Me</h2>
+                <p>===</p>
+                <p>
+                    I enjoy working across the stack and continuously learning
+                    new technologies. [X] [IG] [GitHub] [FB]
+                </p>
+            </section>
 
-## 🧰 Skills Summary ------------------------------------
-- Problem solving
-- Collaboration and communication
-- Systems thinking
-- Attention to detail
+            <section>
+                <h3>🧰 Skills Summary</h3>
+                <ul>
+                    <li>Problem solving</li>
+                    <li>Collaboration and communication</li>
+                    <li>Systems thinking</li>
+                    <li>Attention to detail</li>
+                </ul>
+            </section>
 
-## 🎓 Education -----------------------------------------
-- B.S. in Information Technology @ Centro Escolar University 
-- Expected Graduation: 2028 
+            <section>
+                <h3>🎓 Education</h3>
+                <ul>
+                    <li>B.S. in Information Technology @ Centro Escolar University</li>
+                    <li>Expected Graduation: 2028</li>
+                </ul>
+            </section>
 
-## 📄 Resume --------------------------------------------
-[Download Resume] (or ":open resume.pdf")
-`}
-            </pre>
+            <section>
+                <h3>📄 Resume</h3>
+                <p>
+                    <a href="/resume.pdf" download>Download Resume</a> (or type <code>:open resume.pdf</code>)
+                </p>
+            </section>
         </div>
-   ); 
+    );
 }
 
 function PageContent({selected}:{selected:string}){
