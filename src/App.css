@@ -21,6 +21,11 @@
     box-sizing: border-box;
     font-family: var(--dfont);
     font-size: 2.4rem;
+    pointer-events: none;
+}
+
+button{
+    pointer-events: auto;
 }
 
 html, body, #root {
@@ -153,6 +158,16 @@ nav > button.selected{
     color: var(--bg);
 }
 
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+.home > pre{
+    position: relative;
+    line-height: 24px;
+}
+
 /* Line background system */
 .lines {
     position: absolute;
@@ -166,6 +181,8 @@ nav > button.selected{
     width: 100%;
     height: 24px;
     background-color: var(--bg);
+
+    pointer-events: auto; 
 }
 
 .line > p {

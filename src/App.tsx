@@ -119,10 +119,8 @@ function NavigationButtons(){
 function Header() {
     return (
         <>
-            <div className="wrapper">
-
-                <div className="banner">
-                    <pre>
+            <div className="banner">
+                <pre>
 {` ██████╗ █████╗ ██████╗ ██╗      ██████╗ 
 ██╔════╝██╔══██╗██╔══██╗██║     ██╔═══██╗
 ██║     ███████║██████╔╝██║     ██║   ██║
@@ -130,11 +128,48 @@ function Header() {
 ╚██████╗██║  ██║██║  ██║███████╗╚██████╔╝
  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝
 `}
-                    </pre>
-                    <div className="my-title">Student Developer</div>
-                    <div className="self-intro">I’m a student working toward becoming a software engineer, with an interest in both front-end and back-end development for web and other systems. I enjoy tackling challenges, thinking through problems carefully, and collaborating with others to find effective solutions.</div>
-                </div>
-                <NavigationButtons/>
+                </pre>
+                <div className="my-title">Student Developer</div>
+                <div className="self-intro">I’m a student working toward becoming a software engineer, with an interest in both front-end and back-end development for web and other systems. I enjoy tackling challenges, thinking through problems carefully, and collaborating with others to find effective solutions.</div>
+            </div>
+            <NavigationButtons/>
+        </>
+    );
+}
+
+function Home(){
+   return(
+        <div className="home">
+            <pre>
+{`# Welcome to carlo.dev -----------------------------------
+Hi there! I'm glad you're here.
+
+This site is my personal space to explore and share my work
+as a student developer. I'm passionate about full-stack 
+development 
+and systems programming.
+
+## 📌 Quick Stats ----------------------------------------
+- Projects:     5 active
+- Current Task: Writing this portfolio
+- Last Updated: August 2025
+
+# 🚀 Current Goals----------------------------------------
+- ✅ Finish building this portfolio site
+- 📝 Publish a full-stack React project
+- 📦 Try deploying a personal app using Docker
+- 🔍 Explore WebAssembly for future projects
+`}
+            </pre>
+        </div>
+   ); 
+}
+
+function PageContent(){
+    return(
+        <>
+            <div className="content">
+                <Home/>
             </div>
         </>
     );
@@ -157,7 +192,10 @@ function App() {
         <main>
             {isStart ? (<Welcome />) : 
                 (
-                    <Header />
+                    <div className="wrapper">
+                        <Header />
+                        <PageContent />
+                    </div>
                 )
             }
             <Lines />
