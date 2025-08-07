@@ -1,0 +1,63 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+html,body,#root{
+    height: 100%;
+}
+
+body{
+    padding: 1rem;
+    background: black;
+}
+
+main{
+    background: gray;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.line{
+    display: flex;
+    gap: 3rem;
+
+    width: 100%;
+    height: 32px;
+    background-color: green;
+}
+
+.line > p {
+    font-size: 2.4rem;
+    width: 2.5rem;
+    user-select: none;
+}
+
+.highlight{
+    display: none;
+
+    background-color: pink;
+    flex: 1;
+}
+
+.highlight.active{
+    display: block;
+}
+
+.highlight > div.cursor{
+    background-color: red;
+    height: 100%;
+    width: .8rem;
+
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker{
+    50%{
+        opacity: 0; 
+    }
+}
+
