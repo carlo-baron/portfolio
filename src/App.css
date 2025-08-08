@@ -15,12 +15,12 @@
     font-style: normal;
 }
 
-* {
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: var(--dfont);
-    font-size: 2.4rem;
+    line-height: 24px;
     pointer-events: none;
 }
 
@@ -45,7 +45,13 @@ body {
 main {
     min-height: 100%;
     width: 100%;
+    height: calc(100% - 24px);
     position: relative;
+    overflow-y: auto;
+}
+
+main::-webkit-scrollbar{
+    display: none;
 }
 
 /* Wrapper layout */
@@ -54,6 +60,8 @@ main {
     color: var(--text);
     padding-left: 3rem;
     z-index: 10;
+
+    font-size: 1.4rem;
 }
 
 /* Welcome layout grid */
@@ -63,18 +71,8 @@ main {
         "head head"
         "comm desc";
     grid-template-columns: 1fr 1fr;
-    width: 80%;
-    column-gap: 4rem;
 
-    top: 264px;
-    left: calc(1.5rem + 50%);
-    transform: translateX(-50%);
-}
-
-.wrapper.welcome > div,
-.wrapper.welcome > div span,
-.wrapper.welcome > div p {
-    line-height: 24px;
+    width: 100%;
 }
 
 .wrapper.welcome > div span > span{
@@ -88,6 +86,7 @@ main {
 
 .wrapper.welcome > div.command {
     grid-area: comm;
+    padding-left: 20%;
 }
 
 .wrapper.welcome > div.desc {
@@ -100,24 +99,13 @@ main {
 }
 
 /* ASCII banner */
-.wrapper{
-}
-
 .banner {
-    white-space: pre;
-
     display: grid;
     grid-template-areas:
-        "name intro"
-        "title intro";
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: 2fr;
-    column-gap: 5px
-}
-
-.my-title, .self-intro{
-    font-size: 1.6rem;
-    line-height: 24px;
+        "name"
+        "title"
+        "intro";
+    grid-template-rows: 96px 24px 1fr;
 }
 
 .banner > div.my-title{
@@ -130,22 +118,25 @@ main {
     white-space: wrap;
 }
 
-pre {
+pre.my-name{
     grid-area: name;
     font-family: var(--dfont);
     font-size: 1.4rem;
     line-height: 1.2;
+    text-align: center;
 }
 
 nav{
+    position: sticky;
+    top: 0;
+
     width: 100%;
     display: flex;
-    height: 2.4rem;
+    height: 24px;
 }
 
 nav > button{
     flex: 1;
-    font-size: 1.4rem;
     color: var(--text);
 
     background: var(--bg);
@@ -159,29 +150,22 @@ nav > button.selected{
 }
 
 .content{
+    margin-top: 24px;
     display: flex;
     justify-content: center;
+    padding-right: 1rem;
 }
 
-.page-content > pre{
-    position: relative;
-    line-height: 24px;
+.page-content{
+    text-align: justify;
+    text-justify: inter-word;
 }
 
-.page-content section,
-.page-content h1,
-.page-content h2,
-.page-content h3,
-.page-content strong,
-.page-content em,
-.page-content p,
-.page-content a,
-.page-content code,
-.page-content ul,
-.page-content li{
+.page-content h1{
     font-size: 1.4rem;
-    line-height: 24px;
+    font-weight: 600;
 }
+
 
 /* Line background system */
 .lines {
@@ -202,7 +186,7 @@ nav > button.selected{
 
 .line > p {
     width: 3rem;
-    font-size: 2rem;
+    font-size: 1.4rem;
     user-select: none;
     color: var(--line-num);
 }
@@ -235,4 +219,19 @@ ul{
 
 ul > li::before{
     content: "- ";
+}
+
+.status-line{
+    font-size: 1.4rem;
+    line-height: 24px;
+
+    height: 24px;
+    width: auto;
+    background: green;
+
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 999;
 }

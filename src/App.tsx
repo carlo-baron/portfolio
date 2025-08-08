@@ -12,23 +12,37 @@ function Line({ number, isActive, onMouseEnter }: { number: number, isActive: bo
     );
 }
 
-function Lines(): JSX.Element {
+function Lines({selected}:{selected: string}): JSX.Element {
     const [lineCount, setLineCount] = useState<number>(0);
     const [activeLineIndex, setActiveLineIndex] = useState<number>(0);
 
     useEffect(() => {
         const lineHeight = 24;
-        const mainHeight = document.querySelector('main')?.clientHeight || window.innerHeight;
+        const mainEl = document.querySelector('main');
 
-        let targetParts = Math.floor((mainHeight + lineHeight) / lineHeight);
-        if (targetParts % 2 !== 0) targetParts -= 1;
+        const calcLines = () => {
+            const contentHeight = mainEl?.scrollHeight || document.body.scrollHeight;
 
-        setLineCount(targetParts);
-        setActiveLineIndex(0);
-    }, []);
+            let targetParts = Math.floor((contentHeight + lineHeight) / lineHeight);
+            if (targetParts % 2 !== 0) targetParts -= 1;
+
+            setLineCount(targetParts);
+            setActiveLineIndex(0);
+        }
+        calcLines();
+
+        const resizeObserver = new ResizeObserver(calcLines);
+        resizeObserver.observe(mainEl);
+
+        window.addEventListener('resize', calcLines); 
+        return () => {
+            window.removeEventListener('resize', calcLines);
+            resizeObserver.disconnect();
+        }
+    }, [selected]);
 
     const lines = [];
-    for (let i = 0; i < lineCount-1; i++) {
+    for (let i = 0; i < lineCount - 1; i++) {
         lines.push(
             <Line
                 key={i}
@@ -126,7 +140,7 @@ function Header() {
     return (
         <>
             <div className="banner">
-                <pre>
+                <pre className="my-name">
 {` ██████╗ █████╗ ██████╗ ██╗      ██████╗ 
 ██╔════╝██╔══██╗██╔══██╗██║     ██╔═══██╗
 ██║     ███████║██████╔╝██║     ██║   ██║
@@ -135,7 +149,7 @@ function Header() {
  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝
 `}
                 </pre>
-                <div className="my-title">Student Developer</div>
+                <div className="my-title">"Student Developer"</div>
                 <div className="self-intro">I’m a student working toward becoming a software engineer, with an interest in both front-end and back-end development for web and other systems. I enjoy tackling challenges, thinking through problems carefully, and collaborating with others to find effective solutions.</div>
             </div>
         </>
@@ -147,8 +161,8 @@ function Home(){
     <div className="home page-content">
         <section>
             <h1>:e welcome.md</h1>
-            <h2>Welcome to carlo.dev</h2>
-            <p>===</p>
+            <h1>Welcome to carlo.dev</h1>
+            <p>========================================</p>
             <p>Hi there! I'm glad you're here.</p>
             <p>
                 This site is my personal space to explore and share my work as a student
@@ -157,8 +171,8 @@ function Home(){
         </section>
 
         <section>
-            <h2>📌 Quick Stats</h2>
-            <p>===</p>
+            <h1>📌 Quick Stats</h1>
+            <p>========================================</p>
             <ul>
                 <li>Projects: 5 active</li>
                 <li>Current Task: Writing this portfolio</li>
@@ -168,8 +182,8 @@ function Home(){
 
         <section>
             <h1>:e goals.md</h1>
-            <h2>🚀 Current Goals</h2>
-            <p>===</p>
+            <h1>🚀 Current Goals</h1>
+            <p>========================================</p>
             <ul>
                 <li>✅ Finish building this portfolio site</li>
                 <li>📝 Publish a full-stack React project</li>
@@ -185,8 +199,8 @@ function Projects(){
    return(
     <div className="projects page-content">
         <section>
-            <h2>🛠️ Projects</h2>
-            <p>===</p>
+            <h1>🛠️ Projects</h1>
+            <p>========================================</p>
             <p>
                 Here are some of the personal projects I've built to learn,
                 explore, and apply different technologies.
@@ -194,7 +208,7 @@ function Projects(){
         </section>
 
         <section>
-            <h3>📂 Active Projects</h3>
+            <h1>📂 Active Projects</h1>
             <ul>
                 <li>
                     <strong>todo-app/</strong><br />
@@ -210,7 +224,7 @@ function Projects(){
         </section>
 
         <section>
-            <h3>🧠 Tech Stack</h3>
+            <h1>🧠 Tech Stack</h1>
             <ul>
                 <li><strong>Languages:</strong> JavaScript & TypeScript, Python, C#, PHP</li>
                 <li><strong>Frameworks:</strong> React, Node.js, Express.js</li>
@@ -225,8 +239,8 @@ function About() {
     return (
         <div className="about page-content">
             <section>
-                <h2>👋 About Me</h2>
-                <p>===</p>
+                <h1>👋 About Me</h1>
+                <p>========================================</p>
                 <p>
                     I enjoy working across the stack and continuously learning
                     new technologies. [X] [IG] [GitHub] [FB]
@@ -234,7 +248,7 @@ function About() {
             </section>
 
             <section>
-                <h3>🧰 Skills Summary</h3>
+                <h1>🧰 Skills Summary</h1>
                 <ul>
                     <li>Problem solving</li>
                     <li>Collaboration and communication</li>
@@ -244,7 +258,7 @@ function About() {
             </section>
 
             <section>
-                <h3>🎓 Education</h3>
+                <h1>🎓 Education</h1>
                 <ul>
                     <li>B.S. in Information Technology @ Centro Escolar University</li>
                     <li>Expected Graduation: 2028</li>
@@ -252,7 +266,7 @@ function About() {
             </section>
 
             <section>
-                <h3>📄 Resume</h3>
+                <h1>📄 Resume</h1>
                 <p>
                     <a href="/resume.pdf" download>Download Resume</a> (or type <code>:open resume.pdf</code>)
                 </p>
@@ -283,6 +297,21 @@ function PageContent({selected}:{selected:string}){
     );
 }
 
+function StatusLine(){
+    return(
+        <span className="status-line">
+            <span className="left">
+                <span>Normal</span>
+                <span>Main</span>
+                <span>/home</span>
+            </span><span className="right">
+                <span>100%</span>
+                <span>1:1</span>
+            </span>
+        </span>
+    );
+}
+
 function App() {
     const [isStart, setIsStart] = useState<boolean>(true);
     const [selected, setSelected] = useState<string>("home");
@@ -298,23 +327,26 @@ function App() {
     }, []);
 
     return (
-        <main>
-            {isStart ? (<Welcome />) : 
-                (
-                    <div className="wrapper">
-                        <Header />
-                        <NavigationButtons
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <PageContent 
-                            selected={selected}
-                        />
-                    </div>
-                )
-            }
-            <Lines />
-        </main>
+        <>
+            <main>
+                {isStart ? (<Welcome />) : 
+                    (
+                        <div className="wrapper">
+                            <Header />
+                            <NavigationButtons
+                                selected={selected}
+                                setSelected={setSelected}
+                            />
+                            <PageContent 
+                                selected={selected}
+                            />
+                        </div>
+                    )
+                }
+                <Lines selected={selected}/>
+            </main>
+            <StatusLine />
+        </>
     );
 }
 
