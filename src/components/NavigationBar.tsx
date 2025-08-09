@@ -12,17 +12,17 @@ export default function NavigationButtons({
             <button 
             className={selected === "home" ? 'selected' : ''}
             onClick={() => setSelected("home")}
-            >(1) Home</button>
+            >(1)Home</button>
 
             <button 
             className={selected === "projects" ? 'selected' : ''}
             onClick={() => setSelected("projects")}
-            >(2) Projects</button>
+            >(2)Projects</button>
 
             <button 
             className={selected === "about" ? 'selected' : ''}
             onClick={() => setSelected("about")}
-            >(3) About</button>
+            >(3)About</button>
         </nav>
     );
 }

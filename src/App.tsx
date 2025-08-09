@@ -8,18 +8,46 @@ import PageContent from './components/PageContent.tsx'
 import StatusLine from './components/StatusLine.tsx'
 import CommandBar from './components/CommandBar.tsx'
 
+const handleKey = ({
+  e,
+  setIsStart,
+}: {
+  e: KeyboardEvent;
+  setIsStart: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  if (e.key === 'i') {
+    setIsStart(false);
+  }
+};
+
+const handleClicks = ({
+  e,
+  setIsStart,
+}: {
+  e: MouseEvent;
+  setIsStart: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+    console.log(e);
+    switch(e){
+        default:
+            return setIsStart(false);
+    }
+};
+
 function App() {
     const [isStart, setIsStart] = useState<boolean>(true);
     const [selected, setSelected] = useState<string>("home");
 
     useEffect(() => {
-        const handleKey = (e: KeyboardEvent) => {
-            if (e.key === 'i') {
-                setIsStart(false);
-            }
+        const keyBoardListener = (e: KeyboardEvent) => handleKey({e, setIsStart});
+        const clickListener = (e: MouseEvent) => handleClicks({e, setIsStart});
+
+        window.addEventListener('keydown', keyBoardListener);
+        window.addEventListener('click', clickListener);
+        return () => {
+            window.removeEventListener('keydown', keyBoardListener);
+            window.removeEventListener('click', clickListener);
         };
-        window.addEventListener('keydown', handleKey);
-        return () => window.removeEventListener('keydown', handleKey);
     }, []);
 
     return (
