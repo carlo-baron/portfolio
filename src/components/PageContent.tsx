@@ -55,8 +55,15 @@ function Projects(){
                     GitHub: <em>TBA</em>
                 </li>
                 <li>
-                    <strong>rantals/</strong><br />
+                    <strong><a href="https://lods.fun" target="_blank">
+                    rantals/</a></strong><br />
                     A social media platform dedicated for dev blogs<br />
+                    GitHub: <em>TBA</em>
+                </li>
+                <li>
+                    <strong><a href="" target="_blank">
+                    fractals/</a></strong><br />
+                    A software built using c# and SFML that simulate chaos game<br />
                     GitHub: <em>TBA</em>
                 </li>
             </ul>

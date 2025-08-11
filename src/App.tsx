@@ -27,7 +27,6 @@ const handleClicks = ({
   e: MouseEvent;
   setIsStart: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-    console.log(e);
     switch(e){
         default:
             return setIsStart(false);
@@ -52,7 +51,9 @@ function App() {
 
     return (
         <>
-            <main>
+            <main className={
+                isStart ? "start" : ""
+            }>
                 {isStart ? (<Welcome />) : 
                     (
                         <div className="wrapper">

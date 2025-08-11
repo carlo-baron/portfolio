@@ -28,6 +28,7 @@
     font-family: var(--dfont);
     line-height: 24px;
     pointer-events: none;
+    user-select: none;
 }
 
 button{
@@ -46,6 +47,10 @@ html {
 body {
     padding: 1rem;
     background: var(--bg-dark);
+}
+
+main.start{
+    overflow-y: hidden;
 }
 
 main {
@@ -119,8 +124,19 @@ main::-webkit-scrollbar{
 }
 
 .banner > div.self-intro{
+    pointer-events: auto;
     grid-area: intro;
-    white-space: wrap;
+    padding-right: 1rem;
+
+}
+
+.trunc-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: calc(24px * 4);
 }
 
 pre.my-name{
@@ -145,7 +161,6 @@ nav > button{
     color: var(--text);
 
     background: var(--bg);
-    user-select: none;
     border: none;
 
     font-size: 1.4rem;
@@ -161,7 +176,6 @@ nav > button.selected{
     display: flex;
     justify-content: center;
     padding-right: 1rem;
-
 }
 
 .page-content{
@@ -197,7 +211,6 @@ nav > button.selected{
 .line > p {
     width: 3rem;
     font-size: 1.4rem;
-    user-select: none;
     color: var(--line-num);
 }
 
@@ -306,6 +319,7 @@ svg path{
 }
 
 a{
+    color: var(--text);
     pointer-events: auto;
     height: 24px;
 }
