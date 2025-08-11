@@ -5,15 +5,14 @@ function Line({ number, isActive, onMouseEnter }: { number: number, isActive: bo
         <div className="line" onMouseEnter={onMouseEnter}>
             <p className="line-num">{number}</p>
             <div className={`highlight ${isActive ? 'active' : ''}`}>
-                <div className="cursor"></div>
             </div>
         </div>
     );
 }
 
-function Lines({selected, isStart}:{selected: string; isStart:boolean}){
+function Lines({selected, isStart, activeLineIndex, setActiveLineIndex}:{selected: string; isStart:boolean, activeLineIndex: number, setActiveLineIndex:  React.Dispatch<React.SetStateAction<
+number>>}){
     const [lineCount, setLineCount] = useState<number>(0);
-    const [activeLineIndex, setActiveLineIndex] = useState<number>(0);
 
     useEffect(() => {
         const lineHeight = 24;

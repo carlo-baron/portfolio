@@ -33,9 +33,19 @@ const handleClicks = ({
     }
 };
 
+function Cursor({lineIndex} : {lineIndex: number}){
+    return(
+        <div
+            className="cursor"
+            style={{ top: `calc(24px * ${lineIndex})`}}
+        ></div>
+    );
+}
+
 function App() {
     const [isStart, setIsStart] = useState<boolean>(true);
     const [selected, setSelected] = useState<string>("home");
+    const [activeLineIndex, setActiveLineIndex] = useState<number>(0);
 
     useEffect(() => {
         const keyBoardListener = (e: KeyboardEvent) => handleKey({e, setIsStart});
@@ -57,6 +67,7 @@ function App() {
                 {isStart ? (<Welcome />) : 
                     (
                         <div className="wrapper">
+                            <Cursor lineIndex={activeLineIndex}/> 
                             <Header />
                             <NavigationButtons
                                 selected={selected}
@@ -68,7 +79,12 @@ function App() {
                         </div>
                     )
                 }
-                <Lines selected={selected} isStart={isStart}/>
+                <Lines 
+                    selected={selected} 
+                    isStart={isStart}
+                    activeLineIndex={activeLineIndex}
+                    setActiveLineIndex={setActiveLineIndex}
+                />
             </main>
             <StatusLine />
             <CommandBar />
