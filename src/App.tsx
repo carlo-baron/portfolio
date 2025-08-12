@@ -36,6 +36,7 @@ const handleClicks = ({
 function Cursor({lineIndex} : {lineIndex: number}){
     return(
         <div
+            key={lineIndex}
             className="cursor"
             style={{ top: `calc(24px * ${lineIndex})`}}
         ></div>
