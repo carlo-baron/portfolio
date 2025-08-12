@@ -27,7 +27,7 @@ export default function Welcome() {
 
     return (
         <div 
-        className="wrapper welcome"
+        className="welcome"
         ref={wrapperRef}
         style={{top: `${topOffset}px`}}
         >

@@ -1,21 +1,16 @@
 import { useState, useEffect } from 'react'
 
-function Line({ number, isActive, onMouseEnter, isStart}: { number: number; isActive: boolean; onMouseEnter: () => void; isStart : boolean }) {
+function Line({ number, isActive, onMouseEnter}: { number: number; isActive: boolean; onMouseEnter: () => void; }): React.JSX.Element {
     return (
         <div className="line" onMouseEnter={onMouseEnter}>
             <p className="line-num">{number}</p>
             <div className={`highlight ${isActive ? 'active' : ''}`}>
-                {isStart ? 
-                    (<div className="cursor"></div>)
-                    :
-                    (<div></div>)
-                }
             </div>
         </div>
     );
 }
 
-function Lines({selected, isStart, activeLineIndex, setActiveLineIndex}:{selected: string; isStart:boolean; activeLineIndex: number; setActiveLineIndex:  React.Dispatch<React.SetStateAction<number>>}){
+function Lines({selected, isStart, activeLineIndex, setActiveLineIndex}:{selected: string; isStart:boolean; activeLineIndex: number; setActiveLineIndex:  React.Dispatch<React.SetStateAction<number>>}): React.JSX.Element{
     const [lineCount, setLineCount] = useState<number>(0);
 
     useEffect(() => {
@@ -51,7 +46,6 @@ function Lines({selected, isStart, activeLineIndex, setActiveLineIndex}:{selecte
                 number={i + 1}
                 isActive={i === activeLineIndex}
                 onMouseEnter={() => setActiveLineIndex(i)} 
-                isStart={isStart}
                 />
         );
     }

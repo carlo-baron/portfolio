@@ -65,12 +65,13 @@ function App() {
             <main className={
                 isStart ? "start" : ""
             }>
-                {isStart ? 
-                    (<Welcome />) 
-                    : 
-                    (
-                        <div className="wrapper">
-                            <Cursor lineIndex={activeLineIndex}/> 
+                <div className="wrapper">
+                    <Cursor lineIndex={activeLineIndex}/> 
+                    {isStart ? 
+                        (<Welcome />) 
+                        : 
+                        (
+                        <>
                             <Header />
                             <NavigationButtons
                                 selected={selected}
@@ -79,9 +80,10 @@ function App() {
                             <PageContent 
                                 selected={selected}
                             />
-                        </div>
-                    )
-                }
+                        </>
+                        )
+                    }
+                </div>
                 <Lines 
                     selected={selected} 
                     isStart={isStart}

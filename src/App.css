@@ -65,7 +65,7 @@ main::-webkit-scrollbar{
 }
 
 /* Wrapper layout */
-.wrapper {
+.wrapper, .welcome {
     position: relative;
     color: var(--text);
     padding-left: 3rem;
@@ -75,7 +75,7 @@ main::-webkit-scrollbar{
 }
 
 /* Welcome layout grid */
-.wrapper.welcome {
+.welcome {
     display: grid;
     grid-template-areas:
         "head head"
@@ -85,21 +85,20 @@ main::-webkit-scrollbar{
     width: 100%;
 }
 
-.wrapper.welcome > div span > span{
+.welcome > div span > span{
     color: var(--text-muted) ;
 }
 
-.wrapper.welcome > div.head {
+.welcome > div.head {
     text-align: center;
     grid-area: head;
 }
 
-.wrapper.welcome > div.command {
+.welcome > div.command {
     grid-area: comm;
-    padding-left: 20%;
 }
 
-.wrapper.welcome > div.desc {
+.welcome > div.desc {
     grid-area: desc;
     padding-left: 30%;
 }
