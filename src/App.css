@@ -233,7 +233,7 @@ nav > button.selected{
     position: absolute;
 }
 
-p, h1{
+p, h1, li{
     mix-blend-mode: difference;
 }
 

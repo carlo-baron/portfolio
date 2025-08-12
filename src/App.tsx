@@ -64,7 +64,9 @@ function App() {
             <main className={
                 isStart ? "start" : ""
             }>
-                {isStart ? (<Welcome />) : 
+                {isStart ? 
+                    (<Welcome />) 
+                    : 
                     (
                         <div className="wrapper">
                             <Cursor lineIndex={activeLineIndex}/> 
