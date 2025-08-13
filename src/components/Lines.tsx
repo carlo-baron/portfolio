@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 function Line({ number, isActive, onMouseEnter}: { number: number; isActive: boolean; onMouseEnter: () => void; }): React.JSX.Element {
     return (
@@ -10,8 +10,7 @@ function Line({ number, isActive, onMouseEnter}: { number: number; isActive: boo
     );
 }
 
-function Lines({selected, isStart, activeLineIndex, setActiveLineIndex}:{selected: string; isStart:boolean; activeLineIndex: number; setActiveLineIndex:  React.Dispatch<React.SetStateAction<number>>}): React.JSX.Element{
-    const [lineCount, setLineCount] = useState<number>(0);
+function Lines({selected, isStart, activeLineIndex, setActiveLineIndex, lineCount, setLineCount}:{selected: string; isStart:boolean; activeLineIndex: number; setActiveLineIndex:  React.Dispatch<React.SetStateAction<number>>; lineCount: number; setLineCount:  React.Dispatch<React.SetStateAction<number>>;}): React.JSX.Element{
 
     useEffect(() => {
         const lineHeight = 24;
