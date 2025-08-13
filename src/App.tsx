@@ -10,14 +10,32 @@ import CommandBar from './components/CommandBar.tsx'
 
 const handleKey = ({
   e,
+  isStart, 
   setIsStart,
+  setSelected
 }: {
   e: KeyboardEvent;
+  isStart: boolean;
   setIsStart: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  if (e.key === 'i') {
-    setIsStart(false);
-  }
+    if(isStart){
+        if (e.key === 'i') {
+            setIsStart(false);
+        }
+    }else{
+        switch(e.key){
+            case '1':
+                setSelected("home");
+                break;
+            case '2':
+                setSelected("projects");
+                break;
+            case '3':
+                setSelected("about");
+                break;
+        }  
+    }
 };
 
 const handleClicks = ({
@@ -49,8 +67,13 @@ function App() {
     const [activeLineIndex, setActiveLineIndex] = useState<number>(0);
 
     useEffect(() => {
-        const keyBoardListener = (e: KeyboardEvent) => handleKey({e, setIsStart});
-        const clickListener = (e: MouseEvent) => handleClicks({e, setIsStart});
+        const keyBoardListener = (e: KeyboardEvent) => handleKey({e, 
+                                                                 isStart, 
+                                                                 setIsStart, 
+                                                                 setSelected });
+
+        const clickListener = (e: MouseEvent) => handleClicks({e,
+                                                              setIsStart});
 
         window.addEventListener('keydown', keyBoardListener);
         window.addEventListener('click', clickListener);
@@ -58,7 +81,7 @@ function App() {
             window.removeEventListener('keydown', keyBoardListener);
             window.removeEventListener('click', clickListener);
         };
-    }, []);
+    }, [isStart]);
 
     return (
         <>
