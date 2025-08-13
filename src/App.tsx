@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useRef, useState, useEffect} from 'react'
 import './App.css'
 import Lines from './components/Lines.tsx'
 import Welcome from './components/Welcome.tsx'
@@ -65,13 +65,48 @@ const handleClicks = ({
     }
 };
 
-function Cursor({lineIndex} : {lineIndex: number}){
-    return(
+function Cursor({ lineIndex }: { lineIndex: number }) {
+    const cursorRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const cursor = cursorRef.current;
+        if (!cursor) return;
+
+        const mainEl = document.querySelector('main');
+        if (!mainEl || mainEl.classList.contains("start")) return;
+
+        const lineHeight = 24;
+        const cursorTop = lineIndex * lineHeight;
+        const cursorBottom = cursorTop + lineHeight;
+
+        const scrollTop = mainEl.scrollTop;
+        const viewHeight = mainEl.clientHeight;
+
+        const viewTop = scrollTop;
+        const viewBottom = scrollTop + viewHeight;
+
+        if (cursorBottom > viewBottom) {
+            const nextScroll = Math.min(cursorBottom - viewHeight, mainEl.scrollHeight - viewHeight);
+            mainEl.scrollTop = nextScroll;
+        }
+
+        else if (cursorTop < viewTop) {
+            const nextScroll = Math.max(cursorTop, 0);
+            mainEl.scrollTop = nextScroll;
+        }
+
+    }, [lineIndex]);
+
+    return (
         <div
             key={lineIndex}
             className="cursor"
-            style={{ top: `calc(24px * ${lineIndex})`}}
-        ></div>
+            ref={cursorRef}
+            style={{
+                position: 'absolute',
+                top: `${lineIndex * 24}px`,
+            }}
+        />
     );
 }
 
