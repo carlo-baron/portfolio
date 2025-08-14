@@ -65,7 +65,7 @@ const handleClicks = ({
     }
 };
 
-function Cursor({ lineIndex }: { lineIndex: number }) {
+function Cursor({ lineIndex, scrollLineBuffer=0 }: { lineIndex: number; scrollLineBuffer?: number }) {
     const cursorRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -85,17 +85,19 @@ function Cursor({ lineIndex }: { lineIndex: number }) {
         const viewTop = scrollTop;
         const viewBottom = scrollTop + viewHeight;
 
-        if (cursorBottom > viewBottom) {
-            const nextScroll = Math.min(cursorBottom - viewHeight, mainEl.scrollHeight - viewHeight);
+        const bufferPx = 24 * scrollLineBuffer;
+
+        if (cursorBottom > viewBottom - bufferPx) {
+            const nextScroll = Math.min(cursorBottom - viewHeight + bufferPx, mainEl.scrollHeight - viewHeight);
             mainEl.scrollTop = nextScroll;
         }
 
-        else if (cursorTop < viewTop) {
-            const nextScroll = Math.max(cursorTop, 0);
+        else if (cursorTop < viewTop + bufferPx) {
+            const nextScroll = Math.max(cursorTop - bufferPx, 0);
             mainEl.scrollTop = nextScroll;
         }
 
-    }, [lineIndex]);
+    }, [lineIndex, scrollLineBuffer]);
 
     return (
         <div
@@ -115,6 +117,7 @@ function App() {
     const [selected, setSelected] = useState<string>("home");
     const [activeLineIndex, setActiveLineIndex] = useState<number>(0);
     const [lineCount, setLineCount] = useState<number>(0);
+    const scrollLineBuffer: number = 5;
 
     useEffect(() => {
         const keyBoardListener = (e: KeyboardEvent) => handleKey({e, 
@@ -149,7 +152,9 @@ function App() {
                 isStart ? "start" : ""
             }>
                 <div className="wrapper">
-                    <Cursor lineIndex={activeLineIndex}/> 
+                    <Cursor lineIndex={activeLineIndex}
+                    scrollLineBuffer={scrollLineBuffer}
+                    /> 
                     {isStart ? 
                         (<Welcome />) 
                         : 
@@ -171,7 +176,6 @@ function App() {
                     selected={selected} 
                     isStart={isStart}
                     activeLineIndex={activeLineIndex}
-                    setActiveLineIndex={setActiveLineIndex}
                     lineCount={lineCount}
                     setLineCount={setLineCount}
                 />
