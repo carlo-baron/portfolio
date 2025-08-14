@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 
-function Line({ number, isActive, onMouseEnter}: { number: number; isActive: boolean; onMouseEnter: () => void; }): React.JSX.Element {
+function Line( { number, isActive }: { number: number; isActive: boolean;} ){
     return (
-        <div className="line" onMouseEnter={onMouseEnter}>
+        <div className="line">
             <p className="line-num">{number}</p>
             <div className={`highlight ${isActive ? 'active' : ''}`}>
             </div>
@@ -10,7 +10,7 @@ function Line({ number, isActive, onMouseEnter}: { number: number; isActive: boo
     );
 }
 
-function Lines({selected, isStart, activeLineIndex, setActiveLineIndex, lineCount, setLineCount}:{selected: string; isStart:boolean; activeLineIndex: number; setActiveLineIndex:  React.Dispatch<React.SetStateAction<number>>; lineCount: number; setLineCount:  React.Dispatch<React.SetStateAction<number>>;}): React.JSX.Element{
+function Lines({selected, isStart, activeLineIndex, lineCount, setLineCount}:{selected: string; isStart:boolean; activeLineIndex: number; lineCount: number; setLineCount:  React.Dispatch<React.SetStateAction<number>>;}): React.JSX.Element{
 
     useEffect(() => {
         const lineHeight = 24;
@@ -23,7 +23,6 @@ function Lines({selected, isStart, activeLineIndex, setActiveLineIndex, lineCoun
             if (targetParts % 2 !== 0) targetParts -= 1;
 
             setLineCount(targetParts);
-            setActiveLineIndex(0);
         }
         calcLines();
 
@@ -44,7 +43,6 @@ function Lines({selected, isStart, activeLineIndex, setActiveLineIndex, lineCoun
                 key={i}
                 number={i + 1}
                 isActive={i === activeLineIndex}
-                onMouseEnter={() => setActiveLineIndex(i)} 
                 />
         );
     }

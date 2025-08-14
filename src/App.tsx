@@ -126,12 +126,20 @@ function App() {
 
         const clickListener = (e: MouseEvent) => handleClicks({e,
                                                               setIsStart});
+        const mainEl = document.querySelector("main");
+        const wheelListener = (e: WheelEvent) =>  {
+            e.preventDefault(); 
+            const wheelVal: number = e.deltaY > 0 ? 1 : -1;
+            setActiveLineIndex(prev => clamp({ num: prev + wheelVal, min: 0, max: lineCount - 1 }));
+        };
 
         window.addEventListener('keydown', keyBoardListener);
         window.addEventListener('click', clickListener);
+        mainEl?.addEventListener('wheel', wheelListener);
         return () => {
             window.removeEventListener('keydown', keyBoardListener);
             window.removeEventListener('click', clickListener);
+            mainEl?.removeEventListener('wheel', wheelListener);
         };
     }, [isStart, lineCount]);
 
