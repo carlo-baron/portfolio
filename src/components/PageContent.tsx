@@ -3,7 +3,7 @@ function Home(){
     <div className="home page-content">
         <section>
             <h1>Welcome to carlo.dev</h1>
-            <p className="filler">=======================================</p>
+            <p className="filler">==============================================================================</p>
             <p>Hi there! I'm glad you're here.</p>
             <p>
                 This site is my personal space to explore and share my work as a student
@@ -13,7 +13,7 @@ function Home(){
 
         <section>
             <h1>📌 Quick Stats</h1>
-            <p className="filler">=======================================</p>
+            <p className="filler">==============================================================================</p>
             <ul>
                 <li>Projects: 2 active</li>
                 <li>Current Task: Writing this portfolio</li>
@@ -23,7 +23,7 @@ function Home(){
 
         <section>
             <h1>🚀 Current Goals</h1>
-            <p className="filler">=======================================</p>
+            <p className="filler">==============================================================================</p>
             <ul>
                 <li>✅ Finish building this portfolio site</li>
                 <li>📝 Publish my social media app</li>
@@ -45,7 +45,7 @@ function Projects(){
                 explore, and apply different technologies.
             </p>
         </section>
-            <p className="filler">=======================================</p>
+            <p className="filler">==============================================================================</p>
         <section>
             <h1>📂 Active Projects</h1>
             <ul>
@@ -68,7 +68,7 @@ function Projects(){
                 </li>
             </ul>
         </section>
-            <p className="filler">=======================================</p>
+            <p className="filler">==============================================================================</p>
         <section>
             <h1>🧠 Tech Stack</h1>
             <ul>
@@ -91,7 +91,7 @@ function About() {
                     new technologies. 
                 </p>
             </section>
-            <p className="filler">=======================================</p>
+            <p className="filler">==================================================================================</p>
             <section>
                 <h1>🧰 Skills Summary</h1>
                 <ul>
@@ -101,7 +101,7 @@ function About() {
                     <li>Attention to detail</li>
                 </ul>
             </section>
-                <p className="filler">=======================================</p>
+                <p className="filler">==============================================================================</p>
             <section>
                 <h1>🎓 Education</h1>
                 <ul>
@@ -109,14 +109,14 @@ function About() {
                     <li>Expected Graduation: 2028</li>
                 </ul>
             </section>
-                <p className="filler">=======================================</p>
+                <p className="filler">==============================================================================</p>
             <section>
                 <h1>📄 Resume</h1>
                 <p>
                     <a href="" download>Download Resume</a> (or type :open resume.pdf)
                 </p>
             </section>
-                <p className="filler">=======================================</p>
+                <p className="filler">==============================================================================</p>
             <section>
                 <h1>🌐 Socials</h1>
                 <span>
