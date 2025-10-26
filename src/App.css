@@ -1,3 +1,4 @@
+@import "tailwindcss";
 :root {
     --bg: #111722;
     --bg-dark: #060A14;
@@ -199,9 +200,25 @@ nav > button.selected{
     }
 }
 
-@media (min-width: 1000px){
+@media (min-width: 900px){
     .page-content{
         width: 50%;
+    }
+    .banner{
+        width: 90%;
+        display: grid;
+        grid-template-areas:
+            "name intro"
+            "title intro";
+    }
+    .self-intro{
+        padding-inline: 2rem;
+    }
+}
+
+@media (min-width: 1280px){
+    .banner{
+        width: 65%;
     }
 }
 

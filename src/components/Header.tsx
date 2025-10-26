@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+
 export default function Header() {
     const introRef = useRef<HTMLDivElement>(null);
     const [isOverflowing, setIsOverflowing] = useState<boolean>(true);
@@ -8,8 +9,12 @@ export default function Header() {
     }
     
     return (
-        <>
-            <div className="banner">
+        <div
+        className='flex justify-center'
+        >
+            <div 
+            className="banner"
+            >
                 <pre className="my-name">
 {` ██████╗ █████╗ ██████╗ ██╗      ██████╗ 
 ██╔════╝██╔══██╗██╔══██╗██║     ██╔═══██╗
@@ -30,7 +35,7 @@ export default function Header() {
                     </p>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
