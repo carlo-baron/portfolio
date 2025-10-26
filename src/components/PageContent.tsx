@@ -16,8 +16,8 @@ function Home(){
             <p className="filler">==============================================================================</p>
             <ul>
                 <li>Projects: 2 active</li>
-                <li>Current Task: Writing this portfolio</li>
-                <li>Last Updated: August 2025</li>
+                <li>Current Task: Creating Website Templates</li>
+                <li>Last Updated: October 2025</li>
             </ul>
         </section>
 
@@ -25,10 +25,10 @@ function Home(){
             <h1>🚀 Current Goals</h1>
             <p className="filler">==============================================================================</p>
             <ul>
-                <li>✅ Finish building this portfolio site</li>
+                <li>✅ Finish building a social app with Next.js</li>
                 <li>📝 Publish my social media app</li>
                 <li>📦 Try deploying more projects</li>
-                <li>🔍 Learn MERN stack</li>
+                <li>🔍 Learn backend development</li>
             </ul>
         </section>
     </div>
@@ -50,21 +50,33 @@ function Projects(){
             <h1>📂 Active Projects</h1>
             <ul>
                 <li>
-                    <strong>todo-app/</strong><br />
-                    A minimalist task manager using React and Tailwind CSS<br />
-                    GitHub: <em>TBA</em>
+                    <strong><a href="https://kwicom.vercel.app/" target='_blank'>
+                      kwicom/
+                    </a></strong><br />
+                    A basic social app made with Next.js + MongoDB<br />
+                    GitHub: <em><a target='_blank' href="https://github.com/carlo-baron/kwicom">
+                    Click Me!</a></em>
                 </li>
                 <li>
-                    <strong><a href="https://lods.fun" target="_blank">
+                    <strong><a>
                     rantals/</a></strong><br />
                     A social media platform dedicated for dev blogs<br />
-                    GitHub: <em>TBA</em>
+                    GitHub: <em>
+                    <a href="https://github.com/carlo-baron/rantals">
+                      Click Me! 
+                    </a>
+                  </em>
                 </li>
                 <li>
-                    <strong><a href="" target="_blank">
-                    fractals/</a></strong><br />
+                    <strong><a>
+                    chaoSim/</a></strong><br />
                     A software built using c# and SFML that simulate chaos game<br />
-                    GitHub: <em>TBA</em>
+                    GitHub: <em>
+                    <a href="https://github.com/carlo-baron/chaoSim" target='_blank'>
+                      Click Me!
+                    </a>
+                    </em>
+                      
                 </li>
             </ul>
         </section>
@@ -72,9 +84,10 @@ function Projects(){
         <section>
             <h1>🧠 Tech Stack</h1>
             <ul>
-                <li><strong>Languages:</strong> JavaScript & TypeScript, Python, C#, PHP</li>
-                <li><strong>Frameworks:</strong> React, Node.js, Express.js</li>
-                <li><strong>Tools:</strong> Git, Neovim, Google, ChatGPT</li>
+              <li><strong>Languages:</strong> JavaScript & TypeScript, Python, C#, PHP</li>
+              <li><strong>Frameworks:</strong> React, Next.js, Node.js, Express.js</li>
+              <li><strong>Tools:</strong> Git, Neovim, MUI, Framer Motion</li>
+              <li><strong>Others:</strong> Google, ChatGPT</li>
             </ul>
         </section>
     </div>
@@ -113,15 +126,50 @@ function About() {
             <section>
                 <h1>📄 Resume</h1>
                 <p>
-                    <a href="" download>Download Resume</a> (or type :open resume.pdf)
+                    <a 
+                    className='underline'
+                    href="/RESUME.pdf"
+                    download
+                    >Download Resume</a> (or type :open resume.pdf)
                 </p>
             </section>
                 <p className="filler">==============================================================================</p>
             <section>
                 <h1>🌐 Socials</h1>
-                <span>
-                
-                </span>
+                <ol>
+                  <li>
+                    <a 
+                    href="https://www.linkedin.com/in/carlo-baron-dev"
+                    target='_blank'
+                    >
+                      - LinkedIn                
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                    href="https://github.com/carlo-baron/"
+                    target='_blank'
+                    >
+                      - GitHub 
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                    href="https://www.instagram.com/lodsqq/"
+                    target='_blank'
+                    >
+                      - Instagram
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                    href="https://www.facebook.com/carlo.baron.96/"
+                    target='_blank'
+                    >
+                      - Facebook
+                    </a>
+                  </li>
+                </ol>
             </section>
         </div>
     );
